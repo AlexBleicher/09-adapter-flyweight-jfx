@@ -10,8 +10,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public abstract class Fighter {
 
-	private final String pilot;
-	private final Image fighterImage;
+	private final String pilot; //extrinsic
+	private final Image fighterImage; //intrinsic
 
 	public Fighter(String pilot, Image fighterImage) {
 		this.pilot = pilot;
