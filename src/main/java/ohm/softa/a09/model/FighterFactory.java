@@ -7,6 +7,7 @@ import ohm.softa.a09.model.rebellion.AWing;
 import ohm.softa.a09.model.rebellion.Flyweight;
 import ohm.softa.a09.model.rebellion.XWing;
 import ohm.softa.a09.model.rebellion.YWing;
+import ohm.softa.a09.resource.FxImageLoaderAdapter;
 import ohm.softa.a09.resource.ResourceLoader;
 import ohm.softa.a09.util.NameGenerator;
 import javafx.scene.image.Image;
@@ -26,13 +27,13 @@ public final class FighterFactory {
 	private static final int NumberOfKnownFighterTypes = 6;
 	private final Random random;
 	private final NameGenerator nameGenerator;
-	private final ResourceLoader<Image> imageResourceLoader;
+	private final FxImageLoaderAdapter imageResourceLoader;
 	private Map<String, Flyweight> map= new HashMap<>();
 
 	public FighterFactory() {
 		nameGenerator = new NameGenerator();
 		random = new Random();
-		imageResourceLoader = new ResourceLoader<>(Image::new);
+		imageResourceLoader = new FxImageLoaderAdapter();
 	}
 
 	/**
@@ -62,7 +63,7 @@ public final class FighterFactory {
 		if(map.containsKey(path)){
 			return map.get(path);
 		}
-		Flyweight fw = new Flyweight(imageResourceLoader.loadResource(ClassLoader.getSystemClassLoader(), path));
+		Flyweight fw = new Flyweight(imageResourceLoader.loadImage(path));
 		map.put(path, fw);
 		return fw;
 	}
